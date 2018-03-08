@@ -16,8 +16,13 @@ for j, _file in enumerate(_files):
     y = []
     with open(_file, 'r') as f:
         for line in f:
-            x += [float(line.split('\t')[0])]
-            y += [float(line.split('\t')[1][:-1])]
+            if CANADA:
+                if line[0].isdigit() :
+                    x += [float(line.split('.')[0].replace(',', '.'))]
+                    y += [float(line.split('.')[1][:-1].replace(',', '.'))]
+            else:
+                x += [float(line.split('\t')[0])]
+                y += [float(line.split('\t')[1][:-1])]
 
     x = np.array(x)
     if Y_SHIFT and j > 0:
